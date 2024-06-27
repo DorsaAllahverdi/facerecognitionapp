@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'tachyons';
 import './App.css';
 import ParticlesBg from 'particles-bg';
+import Signin from './Components/Signin/Signin';
 import Navigation from './Components/Navigation/Navigation';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
@@ -15,6 +16,7 @@ class App extends Component {
       input:'',
       imageUrl:'',
       facesLoc: [{}],
+      route : 'signin'
     }
   }
 
@@ -85,15 +87,24 @@ class App extends Component {
         .catch(error => console.log('error', error));
   }
 
+  onRouteChange = (route) => {
+    this.setState({route: route});
+  }
+
   render() {
     return (
       <div className="App">
         <ParticlesBg type="circle" bg={true} />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkInput onInputChange={this.onInputChange} onButtonClicked={this.onButtonClicked} />
-        <FaceDetectedImage imageUrl={this.state.imageUrl} facesLoc={this.state.facesLoc} />
+        {this.state.route === 'signin'
+          ? <Signin onRouteChange={this.onRouteChange} />
+          : <div>
+              <Navigation onRouteChange={this.onRouteChange} />
+              <Logo />
+              <Rank />
+              <ImageLinkInput onInputChange={this.onInputChange} onButtonClicked={this.onButtonClicked} />
+              <FaceDetectedImage imageUrl={this.state.imageUrl} facesLoc={this.state.facesLoc} />
+            </div>
+        }
       </div>
     );
   }
