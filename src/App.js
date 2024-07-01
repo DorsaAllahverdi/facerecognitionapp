@@ -3,7 +3,6 @@ import 'tachyons';
 import './App.css';
 import ParticlesBg from 'particles-bg';
 import Signin from './Components/Signin/Signin';
-import Register from './Components/Register/Register';
 import Navigation from './Components/Navigation/Navigation';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
@@ -17,8 +16,7 @@ class App extends Component {
       input:'',
       imageUrl:'',
       facesLoc: [{}],
-      route : 'signin',
-      isSignedin: false
+      route : 'signin'
     }
   }
 
@@ -90,11 +88,6 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    if (route === 'home') {
-      this.setState({isSignedin: true});
-    } else {
-      this.setState({isSignedin: false});
-    }
     this.setState({route: route});
   }
 
@@ -102,20 +95,15 @@ class App extends Component {
     return (
       <div className="App">
         <ParticlesBg type="circle" bg={true} />
-        <Navigation  isSignedin={this.state.isSignedin} onRouteChange={this.onRouteChange} />
         {this.state.route === 'signin'
           ? <Signin onRouteChange={this.onRouteChange} />
-          : ( this.state.route === 'home'
-            ? <div>
-                <Logo />
-                <Rank />
-                <ImageLinkInput onInputChange={this.onInputChange} onButtonClicked={this.onButtonClicked} />
-                <FaceDetectedImage imageUrl={this.state.imageUrl} facesLoc={this.state.facesLoc} />
-              </div>
-            : <div>
-                <Register onRouteChange={this.onRouteChange} />
-              </div>
-          )
+          : <div>
+              <Navigation onRouteChange={this.onRouteChange} />
+              <Logo />
+              <Rank />
+              <ImageLinkInput onInputChange={this.onInputChange} onButtonClicked={this.onButtonClicked} />
+              <FaceDetectedImage imageUrl={this.state.imageUrl} facesLoc={this.state.facesLoc} />
+            </div>
         }
       </div>
     );
