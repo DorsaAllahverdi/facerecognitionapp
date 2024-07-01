@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Navigation = ({onRouteChange}) => {
+const Navigation = () => {
     return (
         <nav style={{display:'flex', justifyContent:'flex-end'}} >
-            <p onClick={() => onRouteChange('signin')} className='f3 link dim underline black pa3 pointer'>Sign Out</p>
+            <p className='f3 link dim underline black pa3 pointer'>Sign Out</p>
         </nav>
     );
 }
